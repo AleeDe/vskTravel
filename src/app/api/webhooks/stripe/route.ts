@@ -4,9 +4,11 @@ import { createClient } from '@supabase/supabase-js'
 
 export const dynamic = 'force-dynamic'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
-  apiVersion: '2026-03-25.dahlia',
-})
+function getStripe(): Stripe | null {
+  const key = process.env.STRIPE_SECRET_KEY
+  if (!key) return null
+  return new Stripe(key, { apiVersion: '2023-10-16' })
+}
 
 // Supabase admin client (service role — bypasses RLS)
 function getAdminClient() {
@@ -26,6 +28,10 @@ export async function POST(request: NextRequest) {
 
   let event: Stripe.Event
   try {
+    const stripe = getStripe()
+    if (!stripe) {
+      return Response.json({ error: 'Stripe not configured' }, { status: 500 })
+    }
     event = stripe.webhooks.constructEvent(
       payload,
       sig,

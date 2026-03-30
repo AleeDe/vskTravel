@@ -1,9 +1,13 @@
 import Stripe from 'stripe'
 import { NextRequest } from 'next/server'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
-  apiVersion: '2026-03-25.dahlia',
-})
+function getStripe(): Stripe | null {
+  const key = process.env.STRIPE_SECRET_KEY
+  if (!key) return null
+  return new Stripe(key, { apiVersion: '2023-10-16' })
+}
+
+export const dynamic = 'force-dynamic'
 
 export interface CheckoutLineItem {
   title: string
@@ -14,6 +18,12 @@ export interface CheckoutLineItem {
 
 export async function POST(request: NextRequest) {
   try {
+    const stripe = getStripe()
+    if (!stripe) {
+      // Avoid failing build/imports; allow frontend to handle stub flow
+      return Response.json({ error: 'Stripe not configured', stub: true }, { status: 200 })
+    }
+
     const body = await request.json() as {
       items: CheckoutLineItem[]
       orderId: string
