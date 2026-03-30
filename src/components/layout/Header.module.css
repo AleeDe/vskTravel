@@ -1,0 +1,346 @@
+/* === Announcement Bar === */
+.announcementBar {
+  background: linear-gradient(90deg, var(--color-primary-900) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  font-size: 13px;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.announcementBar p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.announcementBar a {
+  color: var(--color-accent-light);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* === Header === */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-surface);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-base);
+}
+
+.scrolled {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom-color: var(--color-border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 24px;
+}
+
+/* === Logo === */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+}
+
+.logoText {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+}
+
+.logoAccent {
+  color: var(--color-primary);
+}
+
+/* === Desktop Nav === */
+.desktopNav {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (min-width: 900px) {
+  .desktopNav {
+    display: flex;
+  }
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.navLink:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+}
+
+.navLink.active {
+  color: var(--color-primary);
+  background: var(--color-primary-50);
+}
+
+.chevron {
+  transition: transform var(--transition-fast);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* === Dropdown === */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: 8px;
+  z-index: 50;
+}
+
+.dropdownLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.dropdownLink:hover {
+  background: var(--color-primary-50);
+  color: var(--color-primary-dark);
+}
+
+/* === Actions === */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.actionBtn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.actionBtn:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.actionActive {
+  background: var(--color-primary-50);
+  color: var(--color-primary);
+}
+
+.cartBadge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--color-accent);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.loginBtn {
+  margin-left: 4px;
+}
+
+.mobileToggle {
+  display: flex;
+}
+
+@media (min-width: 900px) {
+  .mobileToggle {
+    display: none;
+  }
+}
+
+/* === Search Bar === */
+.searchBar {
+  border-top: 1px solid var(--color-border-light);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.searchInputWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.searchIcon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 15px;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.searchClose {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast);
+}
+
+.searchClose:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+/* === Mobile Overlay === */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+}
+
+/* === Mobile Drawer === */
+.mobileDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  background: var(--color-surface);
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+}
+
+.mobileDrawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.mobileNav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+}
+
+.mobileNavLink:hover {
+  background: var(--color-surface-hover);
+}
+
+.mobileSubmenu {
+  padding-left: 28px;
+}
+
+.mobileSubLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.mobileSubLink:hover {
+  background: var(--color-primary-50);
+  color: var(--color-primary-dark);
+}
+
+.mobileDrawerFooter {
+  padding: 16px 20px;
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

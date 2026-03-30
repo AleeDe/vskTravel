@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /partner
+Disallow: /account
+Disallow: /api/
+Disallow: /checkout
+Disallow: /*.json$
+Disallow: /?*sort=
+Disallow: /?*filter=
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://vsktravel.pk/sitemap.xml
+Sitemap: https://vsktravel.pk/sitemap-services.xml
+Sitemap: https://vsktravel.pk/sitemap-products.xml
