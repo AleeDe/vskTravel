@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Outfit, Inter } from 'next/font/google';
 import HeaderServer from '@/components/layout/HeaderServer';
 import Footer from '@/components/layout/Footer';
-import { Toaster } from 'sonner';
+import ClientToaster from '@/components/ClientToaster';
 import './globals.css';
 
 const outfit = Outfit({
@@ -137,16 +137,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <Toaster
-          position="top-right"
-          richColors
-          closeButton
-          toastOptions={{
-            style: {
-              fontFamily: 'var(--font-inter), sans-serif',
-            },
-          }}
-        />
+        <ClientToaster />
       </body>
     </html>
   );
