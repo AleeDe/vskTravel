@@ -7,7 +7,8 @@ export const dynamic = 'force-dynamic'
 function getStripe(): Stripe | null {
   const key = process.env.STRIPE_SECRET_KEY
   if (!key) return null
-  return new Stripe(key, { apiVersion: '2023-10-16' })
+  // Use library default API version to avoid TS literal mismatches
+  return new Stripe(key)
 }
 
 // Supabase admin client (service role — bypasses RLS)
@@ -26,12 +27,13 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: 'Missing stripe-signature header' }, { status: 400 })
   }
 
+  const stripe = getStripe()
+  if (!stripe) {
+    return Response.json({ error: 'Stripe not configured' }, { status: 500 })
+  }
+
   let event: Stripe.Event
   try {
-    const stripe = getStripe()
-    if (!stripe) {
-      return Response.json({ error: 'Stripe not configured' }, { status: 500 })
-    }
     event = stripe.webhooks.constructEvent(
       payload,
       sig,
