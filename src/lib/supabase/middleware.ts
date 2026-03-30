@@ -1,7 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
-import { createClient } from '@supabase/supabase-js';
 import { NextResponse, type NextRequest } from 'next/server';
-import { normalizeRole, getRoleDashboardPath, type UserRole } from '@/lib/auth/roles';
+import { normalizeRole, type UserRole } from '@/lib/auth/roles';
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });

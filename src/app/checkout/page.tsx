@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Check, ChevronRight } from 'lucide-react'
 import { toast } from 'sonner'
@@ -26,8 +26,13 @@ export default function CheckoutPage() {
   const productItems = getProductItems()
   const stepIndex = STEPS.indexOf(step)
 
+  useEffect(() => {
+    if (items.length === 0) {
+      router.replace('/cart')
+    }
+  }, [items.length, router])
+
   if (items.length === 0) {
-    router.replace('/cart')
     return null
   }
 
