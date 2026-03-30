@@ -2,6 +2,7 @@
 import { getUserWithRoleFromCookies } from '@/lib/auth/guard'
 import { createClient } from '@supabase/supabase-js'
 import Header from './Header'
+import { isValidRole, type UserRole } from '@/lib/auth/roles'
 
 export default async function HeaderServer() {
   let { user, role } = await getUserWithRoleFromCookies()
@@ -17,7 +18,8 @@ export default async function HeaderServer() {
         .select('role')
         .eq('id', user.id)
         .single()
-      role = (prof?.role as string | undefined) ?? null
+      const dbRole = typeof prof?.role === 'string' ? prof.role.toLowerCase().trim() : null
+      role = dbRole && isValidRole(dbRole) ? (dbRole as UserRole) : null
     } catch {}
   }
   return (
